@@ -1,10 +1,20 @@
 function setup() {
-  createCanvas(1500,900);
-  background(153);
+  createCanvas(1700,1200);
+  background(150);
+  Node.placeNodes();
+  console.log(Node.nodeArr);
+}
+
+function mousePressed(){
+  for(let i = 0; i < Node.nodeArr.length; i++){
+    Node.nodeArr[i].clicked(mouseX, mouseY);
+  }
 }
 
 function draw() {
-  Node.placeNodesOnBoard();
-
+  //console.log(mouseX, mouseY);
+  for(let i = 0; i < Node.nodeArr.length; i++){
+    Node.nodeArr[i].show();
+  }
 
 }
