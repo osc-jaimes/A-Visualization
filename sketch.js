@@ -1,8 +1,12 @@
 function setup() {
-  createCanvas(1700,1200);
-  background(150);
+  createCanvas(1900,1200);
+  background(50, 55, 100);
   Node.placeNodes();
-  console.log(Node.nodeArr);
+  textSize(50);
+  fill(255);
+  text("A*  Path Finding \nVisualization", 50, 1000);
+  textSize(30);
+
 }
 
 function mousePressed(){
