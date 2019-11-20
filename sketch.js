@@ -7,8 +7,40 @@ function setup() {
   text("A*  Path Finding \nVisualization", 50, 1000);
   textSize(30);
 
+  //start button
+  startButton = createButton("Start Search");
+  startButton.position(700,950);
+  startButton.size(300,50);
+  startButton.style('font-size', "25px");
+  startButton.mousePressed(startSearch);
+
+  //clear walls button
+  clearWallsButton = createButton("Clear Walls")
+  clearWallsButton.position(700,1050);
+  clearWallsButton.size(300,50);
+  clearWallsButton.style('font-size', "25px");
+  clearWallsButton.mousePressed(clearWalls);
 }
 
+function clearWalls(){
+  for(let i = 0; i < Node.nodeArr.length; i++){
+      Node.nodeArr[i].clear();
+    }
+}
+
+//start the visualization of the A* path finding algorithm.
+function startSearch(){
+
+}
+
+//draws the nodes on to the canvas
+function drawNodes(){
+  for(let i = 0; i < Node.nodeArr.length; i++){
+    Node.nodeArr[i].show();
+  }
+}
+
+//checks for mouse presses on nodes
 function mousePressed(){
   for(let i = 0; i < Node.nodeArr.length; i++){
     Node.nodeArr[i].clicked(mouseX, mouseY);
@@ -16,9 +48,5 @@ function mousePressed(){
 }
 
 function draw() {
-  //console.log(mouseX, mouseY);
-  for(let i = 0; i < Node.nodeArr.length; i++){
-    Node.nodeArr[i].show();
-  }
-
+  drawNodes();
 }
