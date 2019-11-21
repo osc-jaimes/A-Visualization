@@ -30,7 +30,13 @@ function clearWalls(){
 
 //start the visualization of the A* path finding algorithm.
 function startSearch(){
+  let m = new Map(Node.nodeArr, 30, 18);
+  let start = m.getStartNode();
+  let end = m.getEndNode();
+  let s = new search(m, start, end);
+  s.findPath();
 
+  console.log(s.map);
 }
 
 //draws the nodes on to the canvas
