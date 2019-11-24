@@ -7,7 +7,7 @@ class PriorityQueue{
   contains(node){
     let contains = false;
     for(let i = 0; i < this.items.length; i++){
-      if(this.items[i].getXPoS() == node.getXPos() &&
+      if(this.items[i].getXPos() == node.getXPos() &&
          this.items[i].getYPos() == node.getYPos()){
            contains = true;
          }

@@ -33,10 +33,13 @@ function startSearch(){
   let m = new Map(Node.nodeArr, 30, 18);
   let start = m.getStartNode();
   let end = m.getEndNode();
+  console.log(start);
+  console.log(end);
   let s = new search(m, start, end);
-  s.findPath();
+  let f = s.findPath();
+  //console.log(f)
 
-  console.log(s.map);
+  //console.log(s.map);
 }
 
 //draws the nodes on to the canvas

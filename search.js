@@ -11,40 +11,68 @@ class search{
     openList.enqueue(this.startNode);
     let closedList = new PriorityQueue();
 
-    this.calculateGCost(this.startNode);
+    this.calculateGCost(this.map.getStartNode());
     this.calculateHCost(this.startNode);
     this.calculateFCost(this.startNode);
 
-    while(!openList.isEmpty()){
-      let currentNode = openList.items[0];
-      if(currentNode.isEndNode()){
-        return construct_path(currentNode);
-      }
-      closedList.enqueue(openList.dequeue());
-      let neighbours = this.map.getChildrenOf(currentNode);
-      for(let i = 0; i < neighbours.lenght();i++){
-        currentNeighbour = neighbours[i];
-        if(!closedList.contains(currentNeighbour)){
-          this.calculateGCost(currentNeighbour);
-          this.calculateHCost(currentNeighbour);
-          this.calculateFCost(currentNeighbour);
+    let currentNode = this.startNode;
+    let endFound = false;
+    while(endFound == false){
 
-          if(!openList.contains(currentNeighbour)){
-            openList.enqueue(currentNeighbour);
-          }else{
-            let openNeighbour = currentNeighbour;
+      if(currentNode.isEndNode()){
+        console.log("found");
+        //search.construct_path(this.endNode);
+
+        for(let i = 0; i < openList.items.length; i++){
+          if(!openList.items[i].isStartNode()
+        && !openList.items[i].isEndNode()){
+            openList.items[i].colour = ('yellow');
+            openList.items[i].show();
           }
         }
+
+
+        endFound = true;
+        let happened = true;
+        break;
+      }
+
+
+
+      let children = this.map.getChildrenOf(currentNode);
+      //console.log(children);
+
+      for(let child = 0; child < children.length; child++){
+        this.calculateGCost(children[child]);
+        this.calculateHCost(children[child]);
+        this.calculateFCost(children[child]);
+      }
+
+      let lowestFNode = children[0];
+      for(let i = 0; i < children.length; i++){
+          if(children[i].getFCost() < lowestFNode.getFCost()){
+            lowestFNode = children[i];
+          }
+      }
+
+      openList.enqueue(lowestFNode);
+      currentNode = lowestFNode;
+
+    }
+
+  }//findPath()
+
+  static construct_path(node){
+    while(!node.isStartNode()){
+      node = node.getParent();
+      if(!node.isStartNode()){
+        node.colour = ('yellow');
+        node.show();
       }
     }
+
   }
 
-  construct_path(node){
-    let path = this.openList.items;
-    while(node.getParent() != null){
-      node = node.getParent();
-    }
-  }
 
 
   //calculates h(x) for every node in the graph and assigns it to the node

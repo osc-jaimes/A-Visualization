@@ -11,7 +11,7 @@ class Map{
 
     let nodeArrCounter = 0;
     for(let i = 0; i < this.mapArray.length; i++){
-      for(let j = 0; j < this.mapArray[i].length; j++){
+      for(let j = 0; j < 18; j++){
         this.mapArray[i][j] = nodeArr[nodeArrCounter];
         nodeArrCounter++;
       }
@@ -62,11 +62,16 @@ class Map{
     }
 
     if(node.getXPos() == 1450 && node.getYPos() == 850){
+      this.mapArray[29][16].setParent(node);
+      this.mapArray[28][17].setParent(node);
       return [this.mapArray[29][16], this.mapArray[28][17]];
     }
 
     //xpos is 0 and y is anything else
     if(node.getXPos() == 0){
+      this.mapArray[node.getXPos()/50][(node.getYPos() - 50)/50].setParent(node);
+      this.mapArray[node.getXPos()/50][(node.getYPos() +50)/50].setParent(node);
+      this.mapArray[(node.getXPos() + 50)/50][node.getYPos()/50].setParent(node);
       return [
               this.mapArray[node.getXPos()/50][(node.getYPos() - 50)/50],
               this.mapArray[node.getXPos()/50][(node.getYPos() +50)/50],
@@ -75,6 +80,9 @@ class Map{
     }
     //xPos is 1450 and y is anything else
     if(node.getXPos() == 1450){
+      this.mapArray[node.getXPos()/50][(node.getYPos() - 50)/50].setParent(node);
+      this.mapArray[node.getxPos()/50][(node.getYPos() + 50)/50].setParent(node);
+      this.mapArray[(node.getXPos() - 50) / 50][node.getYPos()/50].setParent(node);
       return [
               this.mapArray[node.getXPos()/50][(node.getYPos() - 50)/50],
               this.mapArray[node.getxPos()/50][(node.getYPos() + 50)/50],
@@ -83,6 +91,9 @@ class Map{
     }
     //ypos 850 and x is anything else
     if(node.getYPos() == 850){
+      this.mapArray[(node.getXPos() - 50)/50][node.getYPos()/50].setParent(node);
+      this.mapArray[(node.getXPos() + 50)/50][node.getYPos()/50].setParent(node);
+      this.mapArray[node.getXPos()/50][(node.getYPos()-50)/50].setParent(node);
       return [
               this.mapArray[(node.getXPos() - 50)/50][node.getYPos()/50],
               this.mapArray[(node.getXPos() + 50)/50][node.getYPos()/50],
@@ -91,6 +102,9 @@ class Map{
     }
     //ypos is 0 and x is anything else
     if(node.getYPos() == 0){
+      this.mapArray[(node.getXPos() - 50)/50][node.getYPos()/50].setParent(node);
+      this.mapArray[(node.getXPos() + 50)/50][node.getYPos()/50].setParent(node);
+      this.mapArray[node.getXPos()/50][(node.getYPos()+50)/50].setParent(node);
       return [
               this.mapArray[(node.getXPos() - 50)/50][node.getYPos()/50],
               this.mapArray[(node.getXPos() + 50)/50][node.getYPos()/50],
@@ -100,7 +114,11 @@ class Map{
 
 
 
+    this.mapArray[node.getXPos()/50][(node.getYPos() + 50)/50].setParent(node);
+    this.mapArray[node.getXPos()/50][(node.getYPos() - 50)/50].setParent(node);
 
+    this.mapArray[(node.getXPos() + 50)/50][node.getYPos()/50].setParent(node);
+    this.mapArray[(node.getXPos() - 50)/50][node.getYPos()/50].setParent(node);
     return [
            this.mapArray[node.getXPos()/50][(node.getYPos() + 50)/50],
            this.mapArray[node.getXPos()/50][(node.getYPos() - 50)/50],

@@ -21,6 +21,8 @@ class Node{
 
   //constructor for a given node
   constructor(xPos,yPos){
+
+    
     this.xPos = xPos;
     this.yPos = yPos;
     this.startNode = false;
@@ -224,7 +226,7 @@ class Node{
   }
 
   static isEqual(node1, node2){
-    return (node1.getXPos() == node2.getXPos() 
+    return (node1.getXPos() == node2.getXPos()
     && node1.getYPos() == node2.getYPos());
   }
 }
