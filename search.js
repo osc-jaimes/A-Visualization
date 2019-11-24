@@ -43,14 +43,22 @@ class search{
       //console.log(children);
 
       for(let child = 0; child < children.length; child++){
+        if(children[child].isBarrierNode()){
+          children[child].setGCost(1000);
+          children[child].setGCost(1000);
+          this.calculateFCost(children[child]);
+          console.log("hit barrier while searching");
+        } else{
         this.calculateGCost(children[child]);
         this.calculateHCost(children[child]);
         this.calculateFCost(children[child]);
+        }
       }
 
       let lowestFNode = children[0];
       for(let i = 0; i < children.length; i++){
-          if(children[i].getFCost() < lowestFNode.getFCost()){
+          if(children[i].getFCost() < lowestFNode.getFCost()
+             && !openList.contains(children[i])){
             lowestFNode = children[i];
           }
       }
@@ -62,16 +70,7 @@ class search{
 
   }//findPath()
 
-  static construct_path(node){
-    while(!node.isStartNode()){
-      node = node.getParent();
-      if(!node.isStartNode()){
-        node.colour = ('yellow');
-        node.show();
-      }
-    }
 
-  }
 
 
 
