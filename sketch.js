@@ -1,22 +1,46 @@
 function setup() {
-  createCanvas(1900,1200);
-  background(50, 55, 100);
+  createCanvas(2200,1200);
+  let c = color(168,167,117);
+  background(c);
   Node.placeNodes();
   textSize(50);
-  fill(255);
+  fill("black");
   text("A*  Path Finding \nVisualization", 50, 1000);
   textSize(30);
 
+
+  fill("white");
+  rect(1600, 210,500,500);
+  textSize(30);
+  fill("black");
+  text("Minimum Spanning Tree: ",1670,200);
+
+  //Heuristic Choice:
+  textSize(30);
+  fill("black");
+  text("Heurisitc Function: ", 1160,975);
+
+  //Heuristic Buttons:
+  manhattanButton = createButton("Manhattan Heuristic");
+  manhattanButton.position(1160,990);
+  manhattanButton.size(240,50);
+  manhattanButton.style('font-size', "25px");
+
+  euclideanButton = createButton("Euclidian Heuristic");
+  euclideanButton.position(1160, 1070);
+  euclideanButton.size(240,50);
+  euclideanButton.style('font-size', "25px");
+
   //start button
   startButton = createButton("Start Search");
-  startButton.position(700,950);
+  startButton.position(700,980);
   startButton.size(300,50);
   startButton.style('font-size', "25px");
   startButton.mousePressed(startSearch);
 
   //clear walls button
   clearWallsButton = createButton("Clear Walls")
-  clearWallsButton.position(700,1050);
+  clearWallsButton.position(700,1080);
   clearWallsButton.size(300,50);
   clearWallsButton.style('font-size', "25px");
   clearWallsButton.mousePressed(clearWalls);

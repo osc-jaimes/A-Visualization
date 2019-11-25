@@ -4,6 +4,7 @@ class search{
     this.map = map;
     this.startNode = startNode;
     this.endNode = endNode;
+
   }
 
   findPath(){
@@ -43,16 +44,21 @@ class search{
       //console.log(children);
 
       for(let child = 0; child < children.length; child++){
+        
         if(children[child].isBarrierNode()){
-          children[child].setGCost(1000);
-          children[child].setGCost(1000);
+          children[child].setGCost(10000);
+          children[child].setGCost(10000);
           this.calculateFCost(children[child]);
           console.log("hit barrier while searching");
         } else{
-        this.calculateGCost(children[child]);
-        this.calculateHCost(children[child]);
-        this.calculateFCost(children[child]);
+          if(!children[child].isStartNode() && !children[child].isEndNode()){
+            children[child].colour = "cyan";
+          }
+          this.calculateGCost(children[child]);
+          this.calculateHCost(children[child]);
+          this.calculateFCost(children[child]);
         }
+
       }
 
       let lowestFNode = children[0];
