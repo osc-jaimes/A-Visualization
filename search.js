@@ -1,4 +1,6 @@
 class search{
+  static manhattan = false;
+  static euclidian = false;
 
   constructor(map, startNode, endNode){
     this.map = map;
@@ -44,7 +46,7 @@ class search{
       //console.log(children);
 
       for(let child = 0; child < children.length; child++){
-        
+
         if(children[child].isBarrierNode()){
           children[child].setGCost(10000);
           children[child].setGCost(10000);
@@ -77,14 +79,22 @@ class search{
   }//findPath()
 
 
-
-
-
   //calculates h(x) for every node in the graph and assigns it to the node
   //manhattan heuristic.
   calculateHCost(node){
-    let h = Math.abs(node.getXPos() - Node.endNodeX) + Math.abs(node.getYPos() - Node.endNodeY);
-    node.setHCost(h);
+
+    if(search.manhattan == true){
+      let h = Math.abs(node.getXPos() - Node.endNodeX) + Math.abs(node.getYPos() - Node.endNodeY);
+      node.setHCost(h);
+    }
+
+    if(search.euclidian == true){
+      let dx = Math.abs(node.getXPos() - Node.endNodeX);
+      let dy = Math.abs(node.getYPos() - Node.endNodeY);
+
+      let h =  Math.sqrt(dx * dx + dy * dy);
+      node.setHCost(h);
+    }
   }
 
   //calculates g(x) for every node

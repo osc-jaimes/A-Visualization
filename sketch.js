@@ -15,6 +15,22 @@ function setup() {
   fill("black");
   text("Minimum Spanning Tree: ",1670,200);
 
+  //Diagonal choices;
+  textSize(30);
+  fill("black");
+  text("Diagonal Choice: ", 1500,975);
+
+  allowDiagButton = createButton("Allow Diagonals");
+  allowDiagButton.position(1500,990);
+  allowDiagButton.size(240,50);
+  allowDiagButton.style('font-size', "25px");
+
+
+  restrictDiagButton = createButton("Restrict Diagonals");
+  restrictDiagButton.position(1500, 1070);
+  restrictDiagButton.size(240,50);
+  restrictDiagButton.style('font-size', "25px");
+
   //Heuristic Choice:
   textSize(30);
   fill("black");
@@ -25,11 +41,13 @@ function setup() {
   manhattanButton.position(1160,990);
   manhattanButton.size(240,50);
   manhattanButton.style('font-size', "25px");
+  manhattanButton.mousePressed(manhattanFunction);
 
   euclideanButton = createButton("Euclidian Heuristic");
   euclideanButton.position(1160, 1070);
   euclideanButton.size(240,50);
   euclideanButton.style('font-size', "25px");
+  euclideanButton.mousePressed(euclideanFunction);
 
   //start button
   startButton = createButton("Start Search");
@@ -44,6 +62,26 @@ function setup() {
   clearWallsButton.size(300,50);
   clearWallsButton.style('font-size', "25px");
   clearWallsButton.mousePressed(clearWalls);
+}
+
+function manhattanFunction(){
+  let col = color(255,255,102);
+  manhattanButton.style('background-color',col);
+
+  let col1 = color(200);
+  euclideanButton.style('background-color', col1);
+  search.manhattan = true;
+  search.euclidian = false;
+}
+
+function euclideanFunction(){
+  let col = color(255,255,102);
+  euclideanButton.style('background-color',col);
+
+  let col1 = color(200);
+  manhattanButton.style('background-color', col1);
+  search.euclidian = true;
+  search.manhattan= false;
 }
 
 function clearWalls(){
