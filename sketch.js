@@ -1,5 +1,5 @@
 function setup() {
-  createCanvas(2200,1200);
+  createCanvas(2200,1250);
   let c = color(168,167,117);
   background(c);
   Node.placeNodes();
@@ -9,11 +9,11 @@ function setup() {
   textSize(30);
 
 
-  fill("white");
+  fill(200);
   rect(1600, 210,500,500);
   textSize(30);
   fill("black");
-  text("Minimum Spanning Tree: ",1670,200);
+  text("Spanning Tree: ",1670,200);
 
   //Diagonal choices;
   textSize(30);
@@ -24,12 +24,14 @@ function setup() {
   allowDiagButton.position(1500,990);
   allowDiagButton.size(240,50);
   allowDiagButton.style('font-size', "25px");
+  allowDiagButton.mousePressed(allowDiagonals);
 
 
   restrictDiagButton = createButton("Restrict Diagonals");
   restrictDiagButton.position(1500, 1070);
   restrictDiagButton.size(240,50);
   restrictDiagButton.style('font-size', "25px");
+  restrictDiagButton.mousePressed(restrictDiagonals);
 
   //Heuristic Choice:
   textSize(30);
@@ -62,6 +64,24 @@ function setup() {
   clearWallsButton.size(300,50);
   clearWallsButton.style('font-size', "25px");
   clearWallsButton.mousePressed(clearWalls);
+}
+
+function allowDiagonals(){
+  search.allowDiagonals = true;
+  let col = color(255,255,102);
+  allowDiagButton.style('background-color', col);
+
+  let col1 = color(200);
+  restrictDiagButton.style('background-color',col1);
+}
+
+function restrictDiagonals(){
+  search.allowDiagonals = false;
+  let col = color(255,255,102);
+  restrictDiagButton.style('background-color', col);
+
+  let col1 = color(200);
+  allowDiagButton.style('background-color',col1);
 }
 
 function manhattanFunction(){

@@ -128,5 +128,36 @@ class Map{
            ];
   }
 
+  getDiagonalChildrenOf(node){
+    if(node.getXPos() == 0 && node.getYPos() == 0){
+      return [
+        this.mapArray[(node.getXpos() + 50)/50][(node.getYpos() + 50)/50]
+      ];
+    }
+
+    if(node.getXPos() == 0 && node.getYPos() != 0){
+      return [
+        this.mapArray[(node.getXPos() + 50)/50][(node.getYPos() - 50)/50],
+        this.mapArray[(node.getXPos() + 50)/50][(node.getYPos() + 50)/50]
+      ];
+    }
+
+    if(node.getXPos() == 0 && node.getYPos() == 850){
+      return[
+        this.mapArray[(node.getXPos() + 50)/50][(node.getXPos() - 50)/50]
+      ];
+    }
+
+
+    return[
+      this.mapArray[(node.getXPos() + 50)/50][(node.getYPos() + 50)/50],
+      this.mapArray[(node.getXPos() + 50)/50][(node.getYPos() - 50)/50],
+      this.mapArray[(node.getXPos() - 50)/50][(node.getYPos() + 50)/50],
+      this.mapArray[(node.getXPos() - 50)/50][(node.getYPos() - 50)/50],
+
+    ];
+
+  }
+
 
 }

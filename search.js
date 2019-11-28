@@ -1,6 +1,7 @@
 class search{
   static manhattan = false;
   static euclidian = false;
+  static allowDiagonals = false;
 
   constructor(map, startNode, endNode){
     this.map = map;
@@ -36,14 +37,19 @@ class search{
 
 
         endFound = true;
-        let happened = true;
         break;
       }
 
 
+        let children;
 
-      let children = this.map.getChildrenOf(currentNode);
-      //console.log(children);
+        children = this.map.getChildrenOf(currentNode);
+        let diagChildren = this.map.getDiagonalChildrenOf(currentNode);
+        if(search.allowDiagonals == true){
+          for(let i = 0; i <diagChildren.length; i++ ){
+            children.push(diagChildren[i]);
+          }
+        }
 
       for(let child = 0; child < children.length; child++){
 
@@ -60,9 +66,7 @@ class search{
           this.calculateHCost(children[child]);
           this.calculateFCost(children[child]);
         }
-
       }
-
       let lowestFNode = children[0];
       for(let i = 0; i < children.length; i++){
           if(children[i].getFCost() < lowestFNode.getFCost()
@@ -70,14 +74,10 @@ class search{
             lowestFNode = children[i];
           }
       }
-
       openList.enqueue(lowestFNode);
       currentNode = lowestFNode;
-
     }
-
   }//findPath()
-
 
   //calculates h(x) for every node in the graph and assigns it to the node
   //manhattan heuristic.
