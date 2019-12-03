@@ -1,5 +1,5 @@
 function setup() {
-  createCanvas(2200,1250);
+  createCanvas(2385,1219);
   let c = color(168,167,117);
   background(c);
   Node.placeNodes();

@@ -23,13 +23,14 @@ class search{
       let currentNode = openList.front();
         openList.dequeue();
         closedList.enqueue(currentNode);
-        thePathList.push(currentNode);
+
 
         if(currentNode.isEndNode()){
           console.log("found");
           console.log(closedList.items);
           console.log(closedList.items.length);
 
+          /*
           this.calculateHCost(this.startNode);
           this.calculateGCost(this.endNode);
           let distance = (this.startNode.getHCost() + this.endNode.getGCost())/50;
@@ -41,6 +42,13 @@ class search{
               closedList.items[i].show();
             }
           }
+          */
+
+          while(!currentNode.getParent().isStartNode()){
+            currentNode.getParent().colour = "yellow";
+            currentNode = currentNode.getParent();
+          }
+
 
           endFound = true;
           break;
@@ -59,7 +67,10 @@ class search{
         for(let child = 0; child < currentChildren.length; child++){
           if(closedList.contains(currentChildren[child])){
             continue;
+            break;
           }
+
+
 
           if(currentChildren[child].isBarrierNode()){
             currentChildren[child].setGCost(10000);
@@ -68,21 +79,41 @@ class search{
             continue;
           }
 
-          this.calculateGCost(currentChildren[child]);
+
+
+
           this.calculateHCost(currentChildren[child]);
+          this.calculateGCost(currentChildren[child]);
           this.calculateFCost(currentChildren[child]);
 
-          if(openList.contains(currentChildren[child])){
-            if(currentChildren[child].getGCost() > currentNode.getGCost()){
-              continue;
+
+          if(closedList.contains(currentChildren[child])){
+            continue;
+          }else{
+            let possibleG = currentNode.getGCost() + dist(currentNode.getXPos(), currentNode.getYPos(),
+            currentChildren[child].getXPos(), currentChildren[child].getYPos());
+            let possibleGBetter = false;
+
+            if(!openList.contains(currentChildren[child])){
+              openList.enqueue(currentChildren[child]);
+              possibleGBetter = true;
+              this.calculateHCost(currentChildren[child]);
+              if(!currentChildren[child].isEndNode()){
+                currentChildren[child].colour = "cyan";
+              }
+
+            } else if(possibleG < currentChildren[child].getGCost()){
+              possibleGBetter = true;
+            }
+
+            if(possibleGBetter == true){
+              currentChildren[child].setParent(currentNode);
+              this.calculateHCost(currentChildren[child]);
+              this.calculateGCost(currentChildren[child]);
+              this.calculateFCost(currentChildren[child]);
             }
           }
 
-          openList.enqueue(currentChildren[child]);
-          if(!currentChildren[child].isEndNode()){
-            currentChildren[child].colour = "cyan";
-            currentChildren[child].show();
-          }
         }
     }
   }//findPath()
