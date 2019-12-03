@@ -12,68 +12,89 @@ class search{
 
   findPath(){
     let openList = new PriorityQueue();
-    openList.enqueue(this.startNode);
     let closedList = new PriorityQueue();
 
-    this.calculateGCost(this.map.getStartNode());
-    this.calculateHCost(this.startNode);
-    this.calculateFCost(this.startNode);
+    let thePathList= [];
+    openList.enqueue(this.startNode);
 
-    let currentNode = this.startNode;
     let endFound = false;
-    while(endFound == false){
-      closedList.enqueue(openList.front());
-      if(currentNode.isEndNode()){
-        console.log("found");
-        for(let i = 0; i < closedList.items.length; i++){
-          if(!closedList.items[i].isStartNode()
-            && !closedList.items[i].isEndNode()){
-            closedList.items[i].colour = ('yellow');
-            closedList.items[i].show();
+
+    while(!endFound){
+      let currentNode = openList.front();
+        openList.dequeue();
+        closedList.enqueue(currentNode);
+
+
+        if(currentNode.isEndNode()){
+          while(!currentNode.getParent().isStartNode()){
+            currentNode.getParent().colour = "yellow";
+            currentNode = currentNode.getParent();
+          }
+          endFound = true;
+          break;
+        }
+
+        let currentChildren = this.map.getChildrenOf(currentNode);
+
+        //check for diagonal children, if allowed
+        if(search.allowDiagonals){
+          let diagChildren = this.map.getDiagonalChildrenOf(currentNode);
+          for(let i = 0; i < diagChildren.length; i++){
+            currentChildren.push(diagChildren[i]);
           }
         }
 
-
-        endFound = true;
-        break;
-      }
-
-
-        let children;
-
-        children = this.map.getChildrenOf(currentNode);
-        let diagChildren = this.map.getDiagonalChildrenOf(currentNode);
-        if(search.allowDiagonals == true){
-          for(let i = 0; i <diagChildren.length; i++ ){
-            children.push(diagChildren[i]);
+        for(let child = 0; child < currentChildren.length; child++){
+          if(closedList.contains(currentChildren[child])){
+            continue;
+            break;
           }
+
+
+
+          if(currentChildren[child].isBarrierNode()){
+            currentChildren[child].setGCost(10000);
+            currentChildren[child]. setHCost(10000);
+            currentChildren[child].setFCost(20000);
+            continue;
+          }
+
+
+
+
+          this.calculateHCost(currentChildren[child]);
+          this.calculateGCost(currentChildren[child]);
+          this.calculateFCost(currentChildren[child]);
+
+
+          if(closedList.contains(currentChildren[child])){
+            continue;
+          }else{
+            let possibleG = currentNode.getGCost() + dist(currentNode.getXPos(), currentNode.getYPos(),
+            currentChildren[child].getXPos(), currentChildren[child].getYPos());
+            let possibleGBetter = false;
+
+            if(!openList.contains(currentChildren[child])){
+              openList.enqueue(currentChildren[child]);
+              possibleGBetter = true;
+              this.calculateHCost(currentChildren[child]);
+              if(!currentChildren[child].isEndNode()){
+                currentChildren[child].colour = "cyan";
+              }
+
+            } else if(possibleG < currentChildren[child].getGCost()){
+              possibleGBetter = true;
+            }
+
+            if(possibleGBetter == true){
+              currentChildren[child].setParent(currentNode);
+              this.calculateHCost(currentChildren[child]);
+              this.calculateGCost(currentChildren[child]);
+              this.calculateFCost(currentChildren[child]);
+            }
+          }
+
         }
-
-      for(let child = 0; child < children.length; child++){
-
-        if(children[child].isBarrierNode()){
-          children[child].setGCost(10000);
-          children[child].setGCost(10000);
-          this.calculateFCost(children[child]);
-          console.log("hit barrier while searching");
-        } else{
-          if(!children[child].isStartNode() && !children[child].isEndNode()){
-            children[child].colour = "cyan";
-          }
-          this.calculateGCost(children[child]);
-          this.calculateHCost(children[child]);
-          this.calculateFCost(children[child]);
-        }
-      }
-      let lowestFNode = children[0];
-      for(let i = 0; i < children.length; i++){
-          if(children[i].getFCost() < lowestFNode.getFCost()
-             && !openList.contains(children[i])){
-            lowestFNode = children[i];
-          }
-      }
-      openList.enqueue(lowestFNode);
-      currentNode = lowestFNode;
     }
   }//findPath()
 
