@@ -22,7 +22,7 @@ class Node{
   //constructor for a given node
   constructor(xPos,yPos){
 
-    
+
     this.xPos = xPos;
     this.yPos = yPos;
     this.startNode = false;
@@ -165,6 +165,12 @@ class Node{
   static getSartNodePos(){
     return [Node.startNodeX, Node.startNodeY];
   }
+
+
+  hasParent(){
+    return this.getParent() != null;
+  }
+
 
   //get x coordinate of node.
   getXPos(){

@@ -10,10 +10,40 @@ function setup() {
 
 
   fill(200);
-  rect(1600, 210,500,500);
-  textSize(30);
+  rect(1560, 160,600,700);
+  textSize(40);
   fill("black");
-  text("Spanning Tree: ",1670,200);
+  text("Key ",1800,140);
+
+  fill('green');
+  square(1600, 260, 60);
+  fill("Black");
+  textSize(30);
+  text("- Start Node (\'s\' + left click to create)",1665,300);
+
+  fill('red');
+  square(1600,350,60);
+  fill("Black");
+  textSize(30);
+  text("- End Node (\'e\' + left click to create)",1665,390);
+
+  fill('grey');
+  square(1600, 440, 60);
+  fill("Black");
+  textSize(30);
+  text("- Wall Node (left click to create)",1665,480);
+
+  fill("cyan");
+  square(1600, 530, 60);
+  fill("Black");
+  textSize(30);
+  text("- Traversed Node ",1665,570);
+
+  fill("yellow");
+  square(1600,620,60);
+  fill("Black");
+  textSize(30);
+  text("- Final Path ",1665,660);
 
   //Diagonal choices;
   textSize(30);

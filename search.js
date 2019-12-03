@@ -22,16 +22,14 @@ class search{
     let currentNode = this.startNode;
     let endFound = false;
     while(endFound == false){
-
+      closedList.enqueue(openList.front());
       if(currentNode.isEndNode()){
         console.log("found");
-        //search.construct_path(this.endNode);
-
-        for(let i = 0; i < openList.items.length; i++){
-          if(!openList.items[i].isStartNode()
-        && !openList.items[i].isEndNode()){
-            openList.items[i].colour = ('yellow');
-            openList.items[i].show();
+        for(let i = 0; i < closedList.items.length; i++){
+          if(!closedList.items[i].isStartNode()
+            && !closedList.items[i].isEndNode()){
+            closedList.items[i].colour = ('yellow');
+            closedList.items[i].show();
           }
         }
 
