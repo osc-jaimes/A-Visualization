@@ -25,7 +25,7 @@ class search{
         closedList.enqueue(currentNode);
 
 
-        if(currentNode.isEndNode()){
+        if(currentNode.isEndNode()){    
           while(!currentNode.getParent().isStartNode()){
             currentNode.getParent().colour = "yellow";
             currentNode = currentNode.getParent();
