@@ -8,3 +8,6 @@ A P5.js implementation to visualize the A* path finding algorithm.
 2. To add an end node: 'e' + left click
 3. To add a wall: left click
 4. To clear any node: right click
+
+
+![screenshot](https://github.com/osc-jaimes/A-Visualization/blob/master/screenshot.PNG)
