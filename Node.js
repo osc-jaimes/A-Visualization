@@ -142,6 +142,8 @@ class Node{
     }
   }
 
+
+  //Function to clear the board.
   clear(){
     if(!this.isStartNode() && !this.isEndNode()){
       this.startNode = false;
@@ -166,7 +168,7 @@ class Node{
     return [Node.startNodeX, Node.startNodeY];
   }
 
-
+  //Returns true if the node has a parent. False otherwise
   hasParent(){
     return this.getParent() != null;
   }
@@ -231,6 +233,7 @@ class Node{
     return this.parent;
   }
 
+  //returns true if the two nodes are equal. False otherwise
   static isEqual(node1, node2){
     return (node1.getXPos() == node2.getXPos()
     && node1.getYPos() == node2.getYPos());

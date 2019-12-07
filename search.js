@@ -9,7 +9,10 @@ class search{
     this.endNode = endNode;
 
   }
-
+  /**
+  Finds the path between this.startNode and this.endNode
+  Changes node colours to show the path found.
+  */
   findPath(){
     let openList = new PriorityQueue();
     let closedList = new PriorityQueue();
@@ -25,7 +28,7 @@ class search{
         closedList.enqueue(currentNode);
 
 
-        if(currentNode.isEndNode()){    
+        if(currentNode.isEndNode()){
           while(!currentNode.getParent().isStartNode()){
             currentNode.getParent().colour = "yellow";
             currentNode = currentNode.getParent();
@@ -50,8 +53,6 @@ class search{
             break;
           }
 
-
-
           if(currentChildren[child].isBarrierNode()){
             currentChildren[child].setGCost(10000);
             currentChildren[child]. setHCost(10000);
@@ -59,13 +60,9 @@ class search{
             continue;
           }
 
-
-
-
           this.calculateHCost(currentChildren[child]);
           this.calculateGCost(currentChildren[child]);
           this.calculateFCost(currentChildren[child]);
-
 
           if(closedList.contains(currentChildren[child])){
             continue;
@@ -116,7 +113,7 @@ class search{
     }
   }
 
-  //calculates g(x) for every node
+  //calculates g(x) for a node
   calculateGCost(node){
     let g1 = Math.pow(Math.abs(Node.startNodeX - node.getXPos()),2);
     let g2 = Math.pow(Math.abs(Node.startNodeY - node.getYPos()),2);  ;
@@ -124,7 +121,7 @@ class search{
     node.setGCost(gFinal);
   }
 
-  //calculates f(x) for node
+  //calculates f(x) for a node
   calculateFCost(node){
     node.setFCost(node.getGCost() + node.getHCost());
   }

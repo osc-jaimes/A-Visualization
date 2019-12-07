@@ -96,6 +96,7 @@ function setup() {
   clearWallsButton.mousePressed(clearWalls);
 }
 
+//button clicked for diagnals button
 function allowDiagonals(){
   search.allowDiagonals = true;
   let col = color(255,255,102);
@@ -105,6 +106,7 @@ function allowDiagonals(){
   restrictDiagButton.style('background-color',col1);
 }
 
+//button clicked for restrict diagonals button
 function restrictDiagonals(){
   search.allowDiagonals = false;
   let col = color(255,255,102);
@@ -114,6 +116,7 @@ function restrictDiagonals(){
   allowDiagButton.style('background-color',col1);
 }
 
+//button click for manhattan button
 function manhattanFunction(){
   let col = color(255,255,102);
   manhattanButton.style('background-color',col);
@@ -124,6 +127,7 @@ function manhattanFunction(){
   search.euclidian = false;
 }
 
+//button click for euclidiean button
 function euclideanFunction(){
   let col = color(255,255,102);
   euclideanButton.style('background-color',col);
@@ -134,6 +138,7 @@ function euclideanFunction(){
   search.manhattan= false;
 }
 
+//button click for clear walls button.
 function clearWalls(){
   for(let i = 0; i < Node.nodeArr.length; i++){
       Node.nodeArr[i].clear();
@@ -168,6 +173,7 @@ function mousePressed(){
   }
 }
 
+//draws the nodes onto the screen
 function draw() {
   drawNodes();
 }
