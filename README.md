@@ -1,7 +1,9 @@
 # A-Visualization
 A P5.js implementation to visualize the A* path finding algorithm.
 
-
+# How to run the visualization:
+Drag the index.html file into a web browser for the program to run.
+Note that this program has only been tested on Google Chrome.
 
 # Controling The Program:
 1. To add a start node: 's' + left click
