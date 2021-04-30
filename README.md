@@ -16,6 +16,6 @@ all the.js files in the repository into the sample project folder.
 4. To clear any node: right click
 
 
-![screenshot](https://github.com/osc-jaimes/A-Visualization/blob/master/screenshot.PNG)
+![screenshot](https://github.com/osc-jaimes/A-Visualization/blob/main/screenshot.PNG)
 
 
